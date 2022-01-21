@@ -40,7 +40,7 @@ def loop():
                 print_warning_msg("메뉴를 다시 확인하세요.")
         elif go_to == 2: # 시장
             pass
-
+ 
 def garden_proc():
     while True:
         print("""
