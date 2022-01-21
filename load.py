@@ -2,7 +2,7 @@ from classes.food_class import Food
 from classes.shop_class import *
 from classes.farm_class import *
 from mud_game.modules.print_module import *
-
+ 
 
 print_info_msg("게임 데이터 초기화중")
 
