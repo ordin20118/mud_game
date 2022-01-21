@@ -2,10 +2,10 @@ from mud_game.modules.print_module import *
 from mud_game.classes.person_class import Person
 from mud_game.classes.farm_class import *
 from classes.shop_class import *
-
+ 
 player = Person('', '', 0) 
 my_farm = Farm("")
-veget_shop = VegetShop("야채 가게")
+#veget_shop = VegetShop("야채 가게")
 
 # 게임 플레이
 def start_game():
@@ -20,7 +20,7 @@ def loop():
             go_to = 1
         elif go_to == 1: # 농장
             my_farm.print_menu()
-            fram_op = int(input())
+            fram_op = int(input("메뉴를 선택해주세요: "))
 
             if fram_op == 1:
                 print_info_msg("텃밭으로 선택됨")
@@ -49,7 +49,7 @@ def garden_proc():
         4. 뒤로가기
         """)
 
-        garden_op = int(input())
+        garden_op = int(input("메뉴를 선택해주세요: "))
 
         if garden_op == 1:
             my_farm.print_crop_list()
@@ -58,24 +58,32 @@ def garden_proc():
         elif garden_op == 3:
             pass
         elif garden_op == 4:
-            pass
+            break
 
 def veget_shop_proc():
+
+    print(len(veget_shop.sell_list))
     
     while True:
         
         veget_shop.print_menu()
 
-        garden_op = int(input())
+        veget_shop_op = int(input("메뉴를 선택해주세요: "))
 
-        if garden_op == 1:
+        if veget_shop_op == 1:
+            veget_shop.print_sell_list()
+            
+            item_num = int(input("구매하실 아이템을 선택하세요: "))
+
+            item = veget_shop.sell_list[item_num-1]
+            print("%s 아이템을 구매 선택" % item.name)
+
+        elif veget_shop_op == 2:
             pass
-        elif garden_op == 2:
-            pass
-        elif garden_op == 3:
-            pass
-        elif garden_op == 4:
-            pass
+        elif veget_shop_op == 3:
+            break
+        else:
+            print_warning_msg("메뉴를 다시 확인하세요.")
 
 
 
@@ -128,7 +136,7 @@ if __name__ == "__main__":
             player = Person(name, sex, age)
             my_farm = Farm(farm_name)
 
-            import mud_game.load
+            from mud_game.load import *
             
             print_info_msg("%s 농장으로 이동합니다." % my_farm.name)
             start_game()
@@ -142,4 +150,4 @@ if __name__ == "__main__":
             isEnd = True
             break
         else:
-            print("     !!! 잘못된 메뉴 번호 입니다. !!!    ")
+            print_warning_msg("잘못된 메뉴 번호 입니다.")

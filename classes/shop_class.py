@@ -55,7 +55,8 @@ class VegetShop(Shop):
     def print_menu(self):
         print("""
         1. 구매하기
-        2. 뒤로가기
+        2. 판매하기
+        3. 뒤로가기
         """)
 
 
