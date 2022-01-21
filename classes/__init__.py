@@ -1,0 +1,1 @@
+__all__ = ['farm_class', 'food_class', 'item_class', 'person_class', 'shop_class']
