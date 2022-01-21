@@ -13,6 +13,7 @@ def start_game():
 
 
 def loop():
+    print(len(veget_shop.sell_list))
     go_to = 0
     while True:        
         if go_to == 0:
@@ -61,11 +62,10 @@ def garden_proc():
             break
 
 def veget_shop_proc():
-
-    print(len(veget_shop.sell_list))
     
     while True:
         
+        print(len(veget_shop.sell_list))
         veget_shop.print_menu()
 
         veget_shop_op = int(input("메뉴를 선택해주세요: "))

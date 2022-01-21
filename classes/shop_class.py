@@ -1,6 +1,6 @@
-from classes.food_class import Food
-from classes.item_class import Item
-from classes.person_class import Person
+from mud_game.classes.food_class import Food
+from mud_game.classes.item_class import Item
+from mud_game.classes.person_class import Person
 
 # 상점 클래스
 # 속성
@@ -42,11 +42,14 @@ class Shop:
         print("아이템 %s을 구입했습니다." % item.name)
         # 아이템 구매에 의한 금액 차감 및 소지품 추가
 
+
+
+
 # 야채 가게  클래스
 class VegetShop(Shop):
     def add_item(self, vegetable: Food):
-        
-        if type(vegetable) != Food:
+
+        if isinstance(vegetable, Food) == False:
             print("판매 상품으로 추가할 수 없는 아이템입니다.")
             return 0
 
@@ -62,22 +65,5 @@ class VegetShop(Shop):
 
 
 if __name__ == "__main__":
-    vegetable_shop = Shop("야채 가게")
-    vegetable_shop.print_sell_list()
-
-    # 음식 객체 데이터 생성
-    carrot = Food("당근", 100, 5, 10, 0, 3)
-    sweet_potato = Food("고구마", 300, 30, 20, 4, 15)
-    person = Person("철수", "M", 19)
-
-    print("="*40)
-    veget_shop2 = VegetShop("야채 가게2")
-    veget_shop2.add_item(carrot)
-    veget_shop2.add_item(sweet_potato)
-    veget_shop2.add_item(person)
-    veget_shop2.print_sell_list()
-
-
-
-
-
+    pass
+  
