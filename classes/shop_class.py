@@ -1,6 +1,6 @@
-from mud_game.classes.food_class import Food
-from mud_game.classes.item_class import Item
-from mud_game.classes.person_class import Person
+from classes.food_class import Food
+from classes.item_class import Item
+from classes.person_class import Person
 
 # 상점 클래스
 # 속성

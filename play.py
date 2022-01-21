@@ -1,6 +1,6 @@
-from mud_game.modules.print_module import *
-from mud_game.classes.person_class import Person
-from mud_game.classes.farm_class import *
+from modules.print_module import *
+from classes.person_class import Person
+from classes.farm_class import *
 from classes.shop_class import *
  
 player = Person('', '', 0) 
