@@ -1,38 +1,56 @@
 from modules.print_module import *
 from classes.person_class import Person
+from classes.crop_manager import CropManager
 from classes.farm_class import *
 from classes.shop_class import *
+from datetime import datetime
+import os
+import sys
+
+# 실행 파일 만들 시 경로 설정을 위한 코드
+try:
+    os.chdir(sys._MEIPASS)
+    print(sys._MEIPASS)
+except:
+    os.chdir(os.getcwd())
  
 player = Person('', '', 0) 
 my_farm = Farm("")
-#veget_shop = VegetShop("야채 가게")
+
+farm_manager = None
 
 # 게임 플레이
 def start_game():
-    loop()
+    main_loop()
 
 
-def loop():
-    print(len(veget_shop.sell_list))
+def main_loop():
+    
+    farm_manager = CropManager("CropManager", my_farm)
+    farm_manager.start()
+
     go_to = 0
     while True:        
         if go_to == 0:
             print(" ~ 환영합니다! %s님 ~" % player.name)
             go_to = 1
         elif go_to == 1: # 농장
-            my_farm.print_menu()
+            my_farm.print_farm_menu()
             fram_op = int(input("메뉴를 선택해주세요: "))
 
             if fram_op == 1:
-                print_info_msg("텃밭으로 선택됨")
-                pass
+                print_info_msg("밭으로 이동")
+                garden_proc()
             elif fram_op == 2:
-                print_info_msg("야채가게로 선택됨")
+                print_info_msg("야채가게로 이동")
                 veget_shop_proc()
             elif fram_op == 3:
-                break
+                print_info_msg("씨앗가게로 이동")
+                seed_shop_proc()
             elif fram_op == 4:
-                f = open("./save_data.txt", "w")
+                break
+            elif fram_op == 5:
+                f = open("./data/save_data.txt", "w")
                 f.write("저장")
                 f.close()
                 break
@@ -43,29 +61,25 @@ def loop():
  
 def garden_proc():
     while True:
-        print("""
-        1. 농작물 확인
-        2. 재배하기
-        3. 물주기
-        4. 뒤로가기
-        """)
-
+        my_farm.print_garden_menu()
         garden_op = int(input("메뉴를 선택해주세요: "))
 
-        if garden_op == 1:
+        if garden_op == 1:  # 농작물 확인
             my_farm.print_crop_list()
-        elif garden_op == 2:
+        elif garden_op == 2:    # 농작물 심기 
+            # 플레이어의 작물 아이템 확인 
+            # 선택
+            # 심기
             pass
-        elif garden_op == 3:
+        elif garden_op == 3:    # 수확하기
             pass
-        elif garden_op == 4:
+        elif garden_op == 4:    # 뒤로가기
             break
 
 def veget_shop_proc():
     
     while True:
         
-        print(len(veget_shop.sell_list))
         veget_shop.print_menu()
 
         veget_shop_op = int(input("메뉴를 선택해주세요: "))
@@ -76,7 +90,20 @@ def veget_shop_proc():
             item_num = int(input("구매하실 아이템을 선택하세요: "))
 
             item = veget_shop.sell_list[item_num-1]
-            print("%s 아이템을 구매 선택" % item.name)
+            
+
+            # 소지금 확인
+            # 인벤토리에 아이템 넣기 
+            # 소지금 차감
+            # 구매하고 메시지 확인 후 메뉴로 복귀
+            if player.money - item.price < 0:
+                print_warning_msg("소지금이 부족합니다.")
+            else:
+
+                player.money -= item.price
+                print_info_msg("%s 아이템을 구매했습니다." % item.name)
+            
+            print_confirm_msg("확인")
 
         elif veget_shop_op == 2:
             pass
@@ -85,6 +112,36 @@ def veget_shop_proc():
         else:
             print_warning_msg("메뉴를 다시 확인하세요.")
 
+def seed_shop_proc():
+     while True:
+        
+        seed_shop.print_menu()
+
+        seed_shop_op = int(input("메뉴를 선택해주세요: "))
+
+        if seed_shop_op == 1:
+            seed_shop.print_sell_list()
+            
+            item_num = int(input("구매하실 아이템을 선택하세요: "))
+
+            item = seed_shop.sell_list[item_num-1]
+            if player.money - item.price < 0:
+                print_warning_msg("소지금이 부족합니다.")
+            else:
+                player.add_item_to_inventory(item)
+                player.money -= item.price
+                print_info_msg("%s 아이템을 구매했습니다." % item.name)
+                
+            print_confirm_msg("확인")
+
+            player.show_inventory()
+
+        elif seed_shop_op == 2:
+            pass
+        elif seed_shop_op == 3:
+            break
+        else:
+            print_warning_msg("메뉴를 다시 확인하세요.")
 
 
 

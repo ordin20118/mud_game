@@ -1,0 +1,6 @@
+{"name":"당근 씨앗","price":50,"time":"25s","harvest_cnt":1}
+{"name":"옥수수 씨앗","price":100,"time":"3m","harvest_cnt":10}
+{"name":"고구마 종자","price":200,"time":"2h 30m","harvest_cnt":5}
+{"name":"사과 씨앗","price":100,"time":"4m","harvest_cnt":20}
+{"name":"딸기 씨앗","price":200,"time":"10m","harvest_cnt":10}
+{"name":"포도 씨앗","price":130,"time":"1h 5m","harvest_cnt":25}

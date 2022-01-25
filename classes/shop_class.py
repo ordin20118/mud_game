@@ -1,4 +1,6 @@
 from mud_game.classes.food_class import Food
+from mud_game.classes.crop_class import Crop
+from mud_game.classes.seed_class import Seed
 from mud_game.classes.item_class import Item
 from mud_game.classes.person_class import Person
 
@@ -37,6 +39,7 @@ class Shop:
             i += 1
         print("구매할 아이템 번호를 선택해 주세요: ")
 
+    # 상품 구매
     def buy_item(self, person: Person, item_num: int):
         item = self.sell_list[item_num]
         print("아이템 %s을 구입했습니다." % item.name)
@@ -47,9 +50,9 @@ class Shop:
 
 # 야채 가게  클래스
 class VegetShop(Shop):
-    def add_item(self, vegetable: Food):
+    def add_item(self, vegetable: Crop):
 
-        if isinstance(vegetable, Food) == False:
+        if isinstance(vegetable, Crop) == False and isinstance(vegetable, Seed) == False:
             print("판매 상품으로 추가할 수 없는 아이템입니다.")
             return 0
 
@@ -61,6 +64,18 @@ class VegetShop(Shop):
         2. 판매하기
         3. 뒤로가기
         """)
+
+    
+    # 상품 목록 출력
+    def print_sell_list(self):
+        i = 1
+        for item in self.sell_list:
+            icon = ""
+            if item.icon != None:
+                icon = "[" + item.icon + "]"
+            print(" %d. %s %s" % (i,item.icon, item))
+            i += 1
+        print("구매할 아이템 번호를 선택해 주세요: ")
 
 
 

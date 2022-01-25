@@ -9,6 +9,7 @@ from mud_game.classes.food_class import Food
 #   - satiety: 포만감 (max: 100, min: 0)
 #   - thirst: 갈증 (max: 100, min: 0)
 #   - clean: 청결도 (max: 100, min: 0)
+#   - money: 소지금 (초기 자금: 500원)
 # 기능
 #   - 먹기 
 #   - 지불하기
@@ -31,6 +32,20 @@ class Person:
         self.thirst = 0
         self.satiety = 100
         self.clean = 100
+        self.money = 500
+        self.inventory = {}
+
+    def add_item_to_inventory(item):
+        self.inventory[item.name] = item
+        
+
+    def show_inventory(self):
+        print("show_inventory()")
+        inventory_list = list(self.inventory)
+        i = 0
+        for item in inventory_list:
+            print("%d. %s" % (i,item))
+        
 
     # 먹기
     #   - food: 먹을 음식
